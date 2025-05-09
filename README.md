@@ -3,24 +3,43 @@
 基于Zephyr RTOS开发Hypervisor启动Linux内核和Zephyr内核。
 
 ## 项目描述：
-基于实时操作系统Zephyr的虚拟机 Zephyr-based Virtual Machine（ZVM），是一种参考Kernel-based Virtual Machine（KVM）实现的虚拟机，其面向高性能嵌入式计算环境，提供嵌入式平台上的资源隔离和共享服务。
+ZVM（Zephyr-based Virtual Machine）是基于Zephyr RTOS开发的轻量级虚拟机管理器，其面向嵌入式和实时系统环境，提供基础的虚拟化能力。ZVM的目标是支持多种硬件架构，满足混合关键性系统的隔离需求，并兼顾实时性和高性能。
 
-本项目以Zephyr实时操作系统为基础，使用C（C++）在Zephyr RTOS中实现一个面向嵌入式平台的虚拟机管理器。Zephyr RTOS是一个小型的实时操作系统，用于连接、资源受限和嵌入式设备，支持多种架构，发布于Apache License 2.0下。Zephyr包括内核、所有组件和库、设备驱动程序、协议栈、文件系统和固件更新，以开发连接、资源受限和嵌入式设备。Zephyr RTOS易于部署、安全、连接和管理。它具有不断增长的软件库集，可用于各种应用和行业领域，如工业物联网、可穿戴设备、机器学习等。
-
-Zephyr系统整体结构和Linux类型，可以参考KVM思路，实现基于Zephyr RTOS的虚拟化管理平台，有助于更好的理解KVM等复杂虚拟化系统的实现原理。同时考虑在嵌入式等资源受限场景下的虚拟化实现需要注意哪些内容。
+本项目旨在围绕ZVM进行功能增强和特性扩展，吸引同学们学习操作系统、虚拟化相关知识，并通过实际动手开发，提升系统软件开发能力。本次挑战赛设置四个方向，每个方向作为独立子赛题，参赛队伍可选择其一或多个方向进行研究。
 
 ## 参考资料：
-##### (1) https://docs.zephyrproject.org/latest/ 
-##### (2) kvm in linux
-##### (3) https://gitee.com/openeuler/zvm
+##### (1) ZVM项目Gitee地址：https://gitee.com/openeuler/zvm
+##### (2) 云计算内存管理技术: Survey of memory management techniques for hpc and cloud computing
+##### (3) 实时操作系统内存管理算法: An analysis and review on memory management algorithms for real time operating system
+##### (4) 实时多核 VCPU 调度框架: Maracas: A real-time multicore vcpu scheduling framework
+##### (5) ACRN hypervisor(x86): https://github.com/projectacrn/acrn-hypervisor
+##### (6) bao-hypervisor(RISC-V,Armv8-R): https://github.com/bao-project/bao-hypervisor
 
 ## 所属赛道
-2023全国大学生操作系统比赛的“OS功能挑战”赛道
+2025全国大学生操作系统比赛的“OS功能挑战”赛道
 
-## 参赛要求
-以小组为单位参赛，最多三人一个小组，且小组成员是来自同一所高校的本科生（2023年春季学期或之后本科毕业的大一~大四的学生）或研究生
-如学生参加了多个项目，参赛学生选择一个自己参加的项目参与评奖
-请遵循“2023国大学生操作系统比赛”的章程和技术方案要求
+## 题目要求
+本题目设置四个方向，每个方向作为独立子赛题，参赛队伍可选择其一或多个方向进行研究。
+
+### 子赛题1：支持ARMv8 Cortex-R系列
+目前ZVM主要面向Cortex-A系列设计，而Cortex-R系列作为高实时需求场合（如汽车电子、工业控制等）的重要处理器架构，其虚拟化支持对ZVM未来的应用场景具有重要意义。选手需：
+- 分析Cortex-R系列虚拟化特性与差异；
+- 能在QEMU或硬件上运行一个Zephyr或Linux Guest；
+
+### 子赛题2：ZVM内存管理优化
+当前ZVM的内存管理机制较为基础，内存动态管理能力较为基础。选手需：
+- 优化ZVM的动态内存管理机制；
+- 优化ZVM的内存分配与回收算法，提高内存利用率与实时响应需求；
+
+### 子赛题3：ZVM vCPU调度优化
+现有ZVM的vCPU调度策略较为简单，未充分考虑实时性与优先级。选手需：
+- 分析ZVM当前vCPU调度逻辑，设计并实现更优的vCPU调度算法；
+- 支持虚拟机的实时优先级调度，探索Host OS与Guest OS调度协同机制；
+
+### 子赛题4：跨架构支持扩展
+ZVM当前主要支持ARM架构，选手可选择一种新架构（x86或RISC-V）支持核心功能：
+- 分析目标架构的虚拟化特性；
+- 适配ZVM核心框架至目标架构；
 
 ## 项目导师
 谢国琪 xgqman@hnu.edu.cn
@@ -29,18 +48,25 @@ Zephyr系统整体结构和Linux类型，可以参考KVM思路，实现基于Zep
 中等 ~ 高 等
 
 ## 特征：
-1. 使用 C/C++ 语言实现
-2. 至少支持一种硬件平台（比如x86, arm, riscv等）
-3. 支持 QEMU模拟机器上运行/支持在物理机器上运行
-4. 为了兼容Zephyr社区开源协议，License建议为：Apache License 2.0 license
+1. 使用C/C++语言开发；
+2. 支持QEMU模拟器运行或实机运行；
 
 ## 预期目标
 #### 注意：下面的内容是建议内容，不要求必须全部完成。选择本项目的同学也可与导师联系，提出自己的新想法，如导师认可，可加入预期目标
-#### 注：为了避免重复造轮子，本项目既可以从头开发，也可以联系导师在其项目基础上进行进一步的开发
+### 子赛题1预期目标：
+- 在QEMU或开发板上成功运行支持Cortex-R的ZVM；
+- 能在QEMU或硬件上运行Zephyr或Linux虚拟机
 
-1. 能够在QEMU模拟平台上运行，能够支持启动至少两个及以上虚拟机（Linux, Zephyr）。
-2. 能够支持对虚拟机的基本操作，例如创建、运行、挂起、终止等。
-3. 能够支持虚拟机间的通信（可选拓展）。
-4. 能够支持虚拟机上运行实时应用（可选拓展）。
-5. 能够支持virtIO等设备虚拟化框架（可选拓展）。
+### 子赛题2预期目标：
+- 实现ZVM动态内存分配与释放；
+- 测试冬天内存分配下的内存利用率；
+
+### 子赛题3预期目标：
+- 实现ZVM中至少一种vCPU调度实时调度算法；
+- 测试调度性能与实时性指标；
+
+### 子赛题4预期目标：
+- 完成至少一种新架构（x86或RISC-V）的ZVM移植；
+- 能在QEMU或硬件上运行Zephyr或Linux虚拟机
+
 
